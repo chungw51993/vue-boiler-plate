@@ -2,9 +2,14 @@
   <section id="test-page">
     <div class="test-container">
       <div class="header">Vue Boiler Plate is alive</div>
-      <div class="count">{{$store.getters.count}}</div>
+      <div class="count">{{this.count}}</div>
       <span>Check Store by entering number and submit</span>
-      <input v-model="add" class="input" placeholder="Enter Number" />
+      <input
+        class="input"
+        placeholder="Enter Number"
+        type="number"
+        v-model="add"
+      />
       <button @click="addCount()">Submit</button>
       <router-link to="/another">Another Page</router-link>
     </div>
@@ -12,18 +17,39 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'TestComponent',
-  data() {
-    return {
-      add: '',
-    };
+  computed: {
+    add: {
+      get() {
+        return this.$store.state.test.add;
+      },
+      set(value) {
+        return this.$store.dispatch(
+          'changeTestStateInfo',
+          {
+            field: 'add',
+            value: Number(value),
+          },
+        );
+      },
+    },
+    ...mapState({
+      count: state => state.test.count,
+    }),
   },
   methods: {
     addCount() {
-      this.$store.dispatch('incrementCount', this.add);
-      this.add = '';
+      const { add } = this;
+      this.$store.dispatch('incrementCount', add);
     },
+    handleInput(field, value) {
+      this.$store.dispatch('changeTestStateInfo', { field, value });
+    },
+  },
+  mounted() {
   },
 };
 </script>
