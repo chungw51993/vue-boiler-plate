@@ -10,6 +10,10 @@
 <script>
 export default {
   name: 'AnotherComponent',
+  metaInfo: {
+    title: 'Another Test Page',
+    titleTemplate: null,
+  },
 };
 </script>
 

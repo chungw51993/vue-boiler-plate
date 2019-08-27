@@ -4,15 +4,15 @@
   </div>
 </template>
 
+<script>
+import './assets/styles/base.scss';
+
+export default {
+  name: 'App',
+};
+</script>
+
 <style>
-html {
-  height: 100%;
-}
-
-body {
-  height: 100%;
-}
-
 #app {
   display: flex;
   justify-content: center;

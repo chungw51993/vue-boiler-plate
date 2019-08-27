@@ -21,6 +21,10 @@ import { mapState } from 'vuex';
 
 export default {
   name: 'TestComponent',
+  metaInfo: {
+    title: 'Main Test Page',
+    titleTemplate: null,
+  },
   computed: {
     add: {
       get() {
